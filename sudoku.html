@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Defines the character encoding and makes the page mobile responsive -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- The title of the web page that appears in the browser tab -->
+    <title>Advanced Sudoku Game</title>
+    
+    <!-- Link to the external stylesheet for custom styles -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Main container for the game elements -->
+    <div id="game-container">
+        
+        <!-- Game title displayed at the top -->
+        <h1>Sudoku</h1>
+        
+        <!-- Game information section for timer, score, and lives -->
+        <div id="game-info">
+            <!-- Timer to display elapsed time -->
+            <div id="timer">Time: 00:00</div>
+            
+            <!-- Score display -->
+            <div id="score">Score: 0</div>
+            
+            <!-- Display for remaining lives -->
+            <div id="lives">Lives: 3</div>
+        </div>
+
+        <!-- The Sudoku game board, which will be dynamically filled with cells -->
+        <div id="board"></div>
+        
+        <!-- Section for number buttons to input digits into the Sudoku board -->
+        <div id="number-buttons"></div>
+        
+        <!-- Controls for game management: starting new games, changing difficulty, and toggling pencil mode -->
+        <div id="game-controls">
+ 
+            <!-- Dropdown to select difficulty level of the game -->
+            <select id="difficulty">
+                <option value="easy">Easy</option>
+                <option value="medium">Medium</option>
+                <option value="hard">Hard</option>
+            </select>
+            <!-- Button to start a new Sudoku game -->
+            <button id="new-game">New Game</button>
+            <!-- Button to reset the current game -->
+            <button id="reset-game">Reset Game</button>
+            <!-- Button to toggle between pencil mode (for note-taking) and normal mode -->
+            <button id="toggle-pencil">Pencil Mode</button>
+            <button id="dark-mode-toggle">Dark Mode</button>
+        </div>
+    </div>
+    
+    <!-- Link to the external JavaScript file for game functionality -->
+    <script src="script.js"></script>
+</body>
+</html>
