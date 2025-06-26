@@ -18,37 +18,55 @@ document.addEventListener('DOMContentLoaded', () => {
     let score = 0;
     let lives = 3;
 
-    function generatePuzzle() {
-        // Simplified puzzle generation
-        solution = [];
-        for (let i = 0; i < 9; i++) {
-            for (let j = 0; j < 9; j++) {
-                solution.push((i * 3 + Math.floor(i / 3) + j) % 9);
+    function isSafe(board, row, col, num) {
+    for (let x = 0; x < 9; x++) {
+        if (board[row][x] === num || board[x][col] === num) return false;
+        const boxRow = 3 * Math.floor(row / 3) + Math.floor(x / 3);
+        const boxCol = 3 * Math.floor(col / 3) + (x % 3);
+        if (board[boxRow][boxCol] === num) return false;
+        }
+        return true;
+    }
+
+    function fillBoard(board) {
+        for (let row = 0; row < 9; row++) {
+            for (let col = 0; col < 9; col++) {
+                if (board[row][col] === 0) {
+                    const nums = [1, 2, 3, 4, 5, 6, 7, 8, 9].sort(() => Math.random() - 0.5);
+                    for (let num of nums) {
+                        if (isSafe(board, row, col, num)) {
+                            board[row][col] = num;
+                            if (fillBoard(board)) return true;
+                            board[row][col] = 0;
+                        }
+                    }
+                    return false;
+                }
             }
         }
-
-        puzzle = [...solution];
-        const difficulty = difficultySelect.value;
-        let cellsToRemove;
-
-        switch (difficulty) {
-            case 'easy':
-                cellsToRemove = 30;
-                break;
-            case 'medium':
-                cellsToRemove = 40;
-                break;
-            case 'hard':
-                cellsToRemove = 50;
-                break;
-            default:
-                cellsToRemove = 40;
-        }
-
+        return true;
+    }
+    
+    function generatePuzzle() {
+        // Generate full board
+        let fullBoard = Array.from({ length: 9 }, () => Array(9).fill(0));
+        fillBoard(fullBoard);
+    
+        // Save as solution (flattened)
+        solution = fullBoard.flat();
+    
+        // Copy for puzzle, then remove some cells
+        puzzle = solution.slice();
+        let cellsToRemove = {
+            easy: 30,
+            medium: 40,
+            hard: 50
+        }[difficultySelect.value] || 40;
+    
         while (cellsToRemove > 0) {
-            const index = Math.floor(Math.random() * 81);
-            if (puzzle[index] !== 0) {
-                puzzle[index] = 0;
+            const i = Math.floor(Math.random() * 81);
+            if (puzzle[i] !== 0) {
+                puzzle[i] = 0;
                 cellsToRemove--;
             }
         }
