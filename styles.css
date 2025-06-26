@@ -54,6 +54,32 @@ h1 {
     transition: background-color 0.3s;
 }
 
+.cell:nth-child(9n + 1) {
+    clear: left;
+}
+
+/* Add thicker right border after every 3rd column */
+.cell:nth-child(3n) {
+    border-right: 2px solid black;
+}
+
+/* Add thicker bottom border after every 3rd row */
+.cell:nth-child(n + 19):nth-child(-n + 27),
+.cell:nth-child(n + 46):nth-child(-n + 54),
+.cell:nth-child(n + 73):nth-child(-n + 81) {
+    border-bottom: 2px solid black;
+}
+
+/* Add thicker left border to first column */
+.cell:nth-child(9n + 1) {
+    border-left: 2px solid black;
+}
+
+/* Add thicker top border to first row */
+.cell:nth-child(-n + 9) {
+    border-top: 2px solid black;
+}
+
 .cell.given {
     font-weight: bold;
     color: #333;
